@@ -9,3 +9,9 @@ deploy:
   on:
     tags: true
     repo: divshot/superstatic
+
+script
+  - npm i nsp -g
+  - npm outdated --depth 0 # list outdated modules (won't fail build)
+  - npm shrinkwrap --dev
+  - nsp audit-shrinkwrap || true # validate against nodesecurity.io db, but don't fail the build.
